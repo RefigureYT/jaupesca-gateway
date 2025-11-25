@@ -1,0 +1,2 @@
+# jaupesca-gateway
+Plataforma principal de aplicações web da Jaú Pesca. Este projeto centraliza diversos serviços internos e externos em um único subdomínio, organizados por paths de URL. A proposta é padronizar acesso, simplificar deploy, facilitar debug e unificar o ambiente de produção em um só ponto de entrada.
