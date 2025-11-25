@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Jaú Pesca · Configurações de Remarketing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Configurações de ambiente do fluxo de remarketing da Jaú Pesca." />
+    <link rel="stylesheet" href="/remarketing/public/static/styles/remarketing-config/remarketing-config.css" />
+</head>
+
+<body>
+    <div class="jp-app">
+        <!-- HEADER -->
+        <header class="jp-header">
+            <div class="jp-header__brand">
+                <img src="/remarketing/public/img/Peixinho-Jau-Pesca.png" alt="Jaú Pesca" class="jp-header__logo" loading="lazy" />
+                <div class="jp-header__text">
+                    <span class="jp-header__title">Jaú Pesca · Configurações do Remarketing</span>
+                    <span class="jp-header__subtitle">
+                        Variáveis de ambiente e dados de integração
+                    </span>
+                </div>
+            </div>
+
+            <div class="jp-header__actions">
+                <!-- TOGGLE TEMA -->
+                <button class="theme-toggle" type="button" data-theme-toggle
+                    aria-label="Alternar entre modo claro e escuro">
+                    <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+                    <span class="theme-toggle__label">Modo escuro</span>
+                </button>
+
+                <a href="/remarketing" class="jp-header__back">
+                    <span class="jp-header__back-icon" aria-hidden="true">←</span>
+                    <span class="jp-header__back-label">Voltar</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN -->
+        <main class="cfg-main">
+            <section class="cfg-panel" aria-labelledby="cfg-title">
+                <header class="cfg-panel__header">
+                    <div class="cfg-panel__title-row">
+                        <div>
+                            <h1 id="cfg-title" class="cfg-title">
+                                Configurações de ambiente
+                            </h1>
+                            <p class="cfg-subtitle">
+                                Consulte e ajuste os parâmetros utilizados pelo fluxo de
+                                remarketing. As alterações serão aplicadas pelo backend.
+                            </p>
+                        </div>
+
+                        <div class="cfg-edit-wrap">
+                            <span class="cfg-edit-state" aria-hidden="true"></span>
+
+                            <button type="button" class="cfg-edit" id="cfg-edit-btn"
+                                aria-label="Habilitar edição das variáveis">
+                                <span class="cfg-edit__icon" aria-hidden="true">✏️</span>
+                                <span class="cfg-edit__label">Editar</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Paginação real: 1 de N -->
+                    <div class="cfg-pager" aria-label="Página de configuração">
+                        <button type="button" class="cfg-pager__btn" id="cfg-pager-prev" disabled
+                            aria-label="Página anterior">
+                            ‹
+                        </button>
+                        <span class="cfg-pager__label">1 de 1</span>
+                        <button type="button" class="cfg-pager__btn" id="cfg-pager-next" disabled
+                            aria-label="Próxima página">
+                            ›
+                        </button>
+                    </div>
+
+                </header>
+
+                <!-- FORM -->
+                <form class="cfg-form" id="cfg-form" autocomplete="off">
+                    <div class="cfg-grid">
+                        <!-- ID interno da linha (hidden) -->
+                        <input type="hidden" id="env-config-id" name="config_id" />
+
+                        <!-- id_account -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-id_account">
+                                ID da conta (id_account)
+                            </label>
+                            <input class="env-input" id="env-id_account" name="id_account" type="text" value="1"
+                                readonly />
+                        </div>
+
+                        <!-- access_token -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-access_token">
+                                Token de acesso (access_token)
+                            </label>
+                            <input class="env-input" id="env-access_token" name="access_token" type="text"
+                                value="TOKEN_EXEMPLO_123456789" readonly />
+                        </div>
+
+                        <!-- url_base -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-url_base">
+                                URL base (url_base)
+                            </label>
+                            <input class="env-input" id="env-url_base" name="url_base" type="text"
+                                value="https://cw.jaupesca.com.br" readonly />
+                        </div>
+
+                        <!-- instance -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-instance">
+                                Instância (instance)
+                            </label>
+                            <input class="env-input" id="env-instance" name="instance" type="text"
+                                value="jaupesca-remarketing-01" readonly />
+                        </div>
+
+                        <!-- tempo_inativo_gen (dias) -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-tempo_inativo_gen">
+                                Tempo de inatividade (dias) [GEN]
+                            </label>
+                            <input
+                                class="env-input"
+                                id="env-tempo_inativo_gen"
+                                name="tempo_inativo_gen"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="5"
+                                readonly
+                            />
+                            <p class="env-field__hint">
+                                Tempo mínimo de inatividade do contato, em dias, para os fluxos genéricos
+                                (clientes em geral).
+                            </p>
+                        </div>
+
+                        <!-- tempo_inativo_cnpj (dias) -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-tempo_inativo_cnpj">
+                                Tempo de inatividade (dias) [CNPJ]
+                            </label>
+                            <input
+                                class="env-input"
+                                id="env-tempo_inativo_cnpj"
+                                name="tempo_inativo_cnpj"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="5"
+                                readonly
+                            />
+                            <p class="env-field__hint">
+                                Tempo mínimo de inatividade do contato com CNPJ, em dias, para participar deste fluxo.
+                            </p>
+                        </div>
+
+                        <!-- messages_cnpj -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-messages_cnpj">
+                                Mensagens de remarketing (messages_cnpj · clientes com CNPJ)
+                            </label>
+                            <textarea class="env-input env-input--textarea" id="env-messages_cnpj" name="messages_cnpj"
+                                rows="4" readonly>[
+  {
+    "mode": "debug",
+    "send_by": "cw"
+  }
+]</textarea>
+                            <p class="env-field__hint">
+                                Sequência de mensagens usada para contatos com cadastro de CNPJ.
+                                O backend serializa/deserializa este conteúdo em JSON.
+                            </p>
+                        </div>
+
+                        <!-- messages_generico -->
+                        <div class="env-field">
+                            <label class="env-field__label" for="env-messages_generico">
+                                Mensagens de remarketing (messages_generico · contatos sem CNPJ)
+                            </label>
+                            <textarea class="env-input env-input--textarea" id="env-messages_generico"
+                                name="messages_generico" rows="4" readonly>[]
+</textarea>
+                            <p class="env-field__hint">
+                                Sequência de mensagens usada para contatos sem CNPJ ou com pouca interação
+                                (ex.: mandaram mensagem uma vez e nunca mais responderam).
+                            </p>
+                        </div>
+                    </div>
+                    <footer class="cfg-footer">
+                        <div class="cfg-footer__buttons">
+                            <button type="submit" class="jp-button jp-button--primary" id="cfg-save-btn" disabled>
+                                Salvar alterações
+                            </button>
+
+                            <button type="button" class="jp-button jp-button--secondary" id="cfg-new-btn">
+                                Nova linha
+                            </button>
+
+                            <button type="button" class="jp-button jp-button--danger" id="cfg-delete-btn" disabled>
+                                Excluir linha
+                            </button>
+                        </div>
+
+                        <p class="cfg-footer__hint">
+                            As alterações são salvas diretamente no banco de dados de configuração
+                            do fluxo de remarketing.
+                        </p>
+                    </footer>
+                </form>
+            </section>
+        </main>
+
+        <footer class="jp-footer">
+            <span>Jaú Pesca · Ambiente interno</span>
+            <div class="jp-footer__right">
+                <span>Telemarketing & Remarketing</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/remarketing/public/static/javascript/remarketing-config/remarketing-config.js" defer></script>
+</body>
+
+</html>

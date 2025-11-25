@@ -1,0 +1,1315 @@
+// ---------------- PALETA / TOKENS ----------------
+
+$jp-primary: #005792;
+$jp-primary-alt: #00b4d8;
+$jp-primary-dark: #0b1120;
+$jp-accent: #ffc857;
+
+$jp-radius-lg: 18px;
+$jp-radius-pill: 999px;
+
+$jp-shadow-soft: 0 20px 55px rgba(15, 23, 42, 0.55);
+$jp-transition-fast: 0.18s ease-out;
+
+// Reset simples
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        sans-serif;
+}
+
+// ---------------- TEMAS ----------------
+
+html[data-theme='light'] {
+    --jp-bg: #f3f4f6;
+    --jp-surface: #ffffff;
+    --jp-surface-soft: #f9fafb;
+    --jp-border-subtle: rgba(148, 163, 184, 0.7);
+    --jp-text: #0f172a;
+    --jp-text-muted: #6b7280;
+    --jp-orbit: radial-gradient(circle at 20% 0,
+            rgba(0, 180, 216, 0.18),
+            transparent 60%);
+}
+
+html[data-theme='dark'] {
+    --jp-bg: #020617;
+    --jp-surface: rgba(15, 23, 42, 0.98);
+    --jp-surface-soft: rgba(15, 23, 42, 0.96);
+    --jp-border-subtle: rgba(51, 65, 85, 0.9);
+    --jp-text: #e5e7eb;
+    --jp-text-muted: #94a3b8;
+    --jp-orbit: radial-gradient(circle at 10% 0,
+            rgba(56, 189, 248, 0.3),
+            transparent 60%);
+}
+
+body {
+    background:
+        var(--jp-orbit),
+        var(--jp-bg);
+    color: var(--jp-text);
+    transition:
+        background-color $jp-transition-fast,
+        color $jp-transition-fast;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+// ---------------- LAYOUT BASE ----------------
+
+.jp-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.jp-container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.5rem 1.75rem;
+
+    @media (max-width: 640px) {
+        padding: 1.1rem 1.25rem;
+    }
+}
+
+// ---------------- HEADER ----------------
+
+.jp-header {
+    @extend .jp-container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: linear-gradient(90deg,
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 23, 42, 0.92));
+    color: #e5e7eb;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.88);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    html[data-theme='light'] & {
+        background: rgba(255, 255, 255, 0.92);
+        color: #0f172a;
+        box-shadow: 0 16px 40px rgba(148, 163, 184, 0.55);
+        backdrop-filter: blur(14px);
+    }
+}
+
+.jp-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+// Botão de voltar para HOME no header
+.jp-header__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.85rem;
+    margin-right: 0.6rem;
+    border-radius: $jp-radius-pill;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    border: 1px solid rgba(148, 163, 184, 0.9);
+    background: rgba(15, 23, 42, 0.9);
+    color: #e5e7eb;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color $jp-transition-fast,
+        border-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast;
+
+    html[data-theme='light'] & {
+        background: rgba(255, 255, 255, 0.98);
+        color: #0f172a;
+        border-color: rgba(148, 163, 184, 0.8);
+        box-shadow: 0 8px 20px rgba(148, 163, 184, 0.55);
+    }
+
+    &:hover {
+        transform: translateY(-1px);
+        border-color: $jp-primary-alt;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.75);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.7);
+    }
+}
+
+.jp-header__back-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    background: rgba(15, 23, 42, 1);
+    color: #e5e7eb;
+    flex-shrink: 0;
+
+    html[data-theme='light'] & {
+        background: #e5e7eb;
+        color: #0f172a;
+    }
+}
+
+.jp-header__back-label {
+    white-space: nowrap;
+
+    // Em telas bem pequenas, mostra só a bolinha com a seta
+    @media (max-width: 520px) {
+        display: none;
+    }
+}
+
+.jp-header__logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 2px solid rgba(148, 163, 184, 0.6);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.75);
+}
+
+.jp-header__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.jp-header__title {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 600;
+}
+
+.jp-header__subtitle {
+    font-size: 0.8rem;
+    color: var(--jp-text-muted);
+}
+
+.jp-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.jp-header__settings {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--jp-border-subtle);
+    background: rgba(15, 23, 42, 0.85);
+    color: #e5e7eb;
+    font-size: 0.8rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+        background-color $jp-transition-fast,
+        border-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast;
+
+    html[data-theme='light'] & {
+        background: rgba(255, 255, 255, 0.98);
+        color: #0f172a;
+    }
+
+    &:hover {
+        transform: translateY(-1px);
+        border-color: $jp-primary-alt;
+        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.7);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 7px 16px rgba(15, 23, 42, 0.65);
+    }
+}
+
+.jp-header__settings-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    background: rgba(15, 23, 42, 0.9);
+    color: #e5e7eb;
+
+    html[data-theme='light'] & {
+        background: #e5e7eb;
+        color: #0f172a;
+    }
+}
+
+.jp-header__settings-label {
+    white-space: nowrap;
+}
+
+// ---------------- TOGGLE TEMA ----------------
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: $jp-radius-pill;
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    background: radial-gradient(circle at top left,
+            rgba(56, 189, 248, 0.2),
+            transparent 60%),
+        rgba(15, 23, 42, 0.98);
+    color: #e5e7eb;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition:
+        border-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast,
+        background-color $jp-transition-fast;
+
+    html[data-theme='light'] & {
+        background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.98),
+                rgba(241, 245, 249, 0.96));
+        color: #0f172a;
+    }
+
+    &:hover {
+        border-color: rgba(56, 189, 248, 0.9);
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.7);
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 7px 16px rgba(15, 23, 42, 0.75);
+    }
+}
+
+.theme-toggle__icon {
+    font-size: 1.1rem;
+}
+
+.theme-toggle__label {
+    white-space: nowrap;
+}
+
+// ---------------- MAIN ----------------
+
+.rm-main {
+    @extend .jp-container;
+    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.rm-panel {
+    border-radius: $jp-radius-lg;
+    background: var(--jp-surface);
+    box-shadow: $jp-shadow-soft;
+    border: 1px solid var(--jp-border-subtle);
+    padding: 1.8rem 1.7rem;
+
+    @media (max-width: 640px) {
+        padding: 1.5rem 1.3rem;
+    }
+}
+
+.rm-panel__header {
+    margin-bottom: 1.5rem;
+}
+
+.rm-title {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.5rem, 2.3vw, 1.9rem);
+}
+
+.rm-subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--jp-text-muted);
+}
+
+// ---------------- FORM CONFIG ----------------
+
+.rm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.rm-config {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+
+    @media (max-width: 860px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.rm-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    &--inline {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+    }
+}
+
+.rm-field__label-group {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.rm-field__label {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.rm-select {
+    min-width: 170px;
+    border-radius: 999px;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--jp-border-subtle);
+    background: var(--jp-surface-soft);
+    color: var(--jp-text);
+    font-size: 0.86rem;
+    outline: none;
+    transition:
+        border-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        background-color $jp-transition-fast;
+
+    &:focus {
+        border-color: $jp-primary-alt;
+        box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+    }
+}
+
+// ---------------- INFO TOOLTIP ----------------
+
+.rm-info {
+    position: relative;
+    border-radius: 999px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(148, 163, 184, 0.9);
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(248, 250, 252, 0.9),
+        rgba(30, 64, 175, 0.95)
+    );
+    color: #0f172a;
+    font-size: 0.78rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.75);
+    flex-shrink: 0;
+
+    html[data-theme='light'] & {
+        background: radial-gradient(circle at 30% 30%, #ffffff, #e5e7eb);
+        color: #0f172a;
+        border-color: rgba(148, 163, 184, 0.9);
+        box-shadow: 0 6px 14px rgba(148, 163, 184, 0.6);
+    }
+}
+
+.rm-info__tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 0.6rem);
+    transform: translateX(-50%) translateY(4px);
+    min-width: 240px;
+    max-width: 320px;
+    background: rgba(15, 23, 42, 0.98);
+    color: #e5e7eb;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.7);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity $jp-transition-fast,
+        transform $jp-transition-fast;
+    z-index: 20;
+    text-align: left;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: rgba(15, 23, 42, 0.98) transparent transparent transparent;
+    }
+
+    html[data-theme='light'] & {
+        background: #0f172a;
+        color: #e5e7eb;
+    }
+}
+
+.rm-info:hover .rm-info__tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+// destaque extra quando o JS quiser chamar atenção pro "i"
+.rm-info--highlight {
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.7);
+}
+
+// ---------------- TOGGLE SWITCH ----------------
+
+.toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toggle__track {
+    width: 46px;
+    height: 24px;
+    border-radius: $jp-radius-pill;
+    background: rgba(148, 163, 184, 0.55);
+    display: inline-flex;
+    align-items: center;
+    padding: 0 3px;
+    transition:
+        background-color $jp-transition-fast,
+        box-shadow $jp-transition-fast;
+}
+
+.toggle__thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: #f9fafb;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.6);
+    transform: translateX(0);
+    transition: transform $jp-transition-fast;
+}
+
+.toggle input:checked+.toggle__track {
+    background: linear-gradient(135deg, $jp-primary-alt, $jp-primary);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.7);
+}
+
+.toggle input:checked+.toggle__track .toggle__thumb {
+    transform: translateX(20px);
+}
+
+// ---------------- BUILDER ----------------
+
+// Abas de fluxo (CNPJ / Genérico)
+.rm-builder__tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem;
+    border-radius: $jp-radius-pill;
+    background: var(--jp-surface-soft);
+    border: 1px solid var(--jp-border-subtle);
+}
+
+.rm-builder__tab {
+    position: relative;
+    border: none;
+    border-radius: $jp-radius-pill;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    background: transparent;
+    color: var(--jp-text-muted);
+    transition:
+        background-color $jp-transition-fast,
+        color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast;
+    white-space: nowrap;
+}
+
+/* Hover só em abas inativas */
+.rm-builder__tab:not(.rm-builder__tab--active):hover {
+    background: rgba(15, 23, 42, 0.06);
+    color: var(--jp-text);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.4);
+}
+
+.rm-builder__tab:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.8);
+}
+
+/* Aba ativa sempre com destaque forte */
+.rm-builder__tab--active {
+    background-image: linear-gradient(130deg, $jp-primary-alt, $jp-primary);
+    color: #f9fafb;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
+    transform: translateY(-1px);
+}
+
+/* Efeito extra quando passa o mouse na aba já ativa (não “apaga”) */
+.rm-builder__tab--active:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 1);
+}
+
+/* Linha de brilho embaixo da aba selecionada */
+.rm-builder__tab--active::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: -6px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, $jp-primary-alt, $jp-primary);
+    opacity: 0.9;
+}
+
+// container do builder
+.rm-builder {
+    border-radius: 1rem;
+    padding: 1.2rem 1rem 1.3rem;
+    background: var(--jp-surface-soft);
+    border: 1px dashed var(--jp-border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rm-builder__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+// Bloco de mensagem
+.msg-block {
+    border-radius: 1rem;
+    background: var(--jp-surface);
+    border: 1px solid var(--jp-border-subtle);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+    transition:
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast,
+        border-color $jp-transition-fast;
+}
+
+.msg-block__inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.8rem;
+    padding: 0.75rem 0.9rem 0.9rem;
+
+    @media (max-width: 640px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.msg-block__side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: flex-start;
+
+    @media (max-width: 640px) {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
+
+// Handle (6 bolinhas)
+.msg-block__handle {
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    border-radius: 0.7rem;
+    cursor: grab;
+    display: grid;
+    grid-template-columns: repeat(2, 5px);
+    grid-auto-rows: 5px;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.msg-block__handle-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.9);
+}
+
+.msg-block__handle:hover {
+    background: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.4);
+}
+
+.msg-block__remove {
+    border-radius: 999px;
+    border: none;
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.06);
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition:
+        background-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast;
+
+    &:hover {
+        background: rgba(239, 68, 68, 0.16);
+        box-shadow: 0 10px 24px rgba(127, 29, 29, 0.6);
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 12px rgba(127, 29, 29, 0.6);
+    }
+}
+
+.msg-block__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.msg-block__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.msg-block__type {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: $jp-primary-alt;
+    font-weight: 600;
+}
+
+// Textarea
+.msg-block__textarea {
+    width: 100%;
+    min-height: 96px;
+    border-radius: 0.8rem;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.9rem;
+    border: 1px solid var(--jp-border-subtle);
+    background: var(--jp-surface-soft);
+    color: var(--jp-text);
+    resize: vertical;
+    outline: none;
+    transition:
+        border-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        background-color $jp-transition-fast;
+
+    &:focus {
+        border-color: $jp-primary-alt;
+        box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.55);
+        background: #0b11201a;
+    }
+}
+
+.msg-block__caption {
+    min-height: 72px;
+}
+
+// Estado enquanto arrasta
+.msg-block--dragging {
+    opacity: 0.88;
+    transform: scale(0.995);
+    border-color: rgba(56, 189, 248, 0.95);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.85);
+}
+
+// ---------------- DROP DE ARQUIVO ----------------
+
+.file-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.file-drop {
+    border-radius: 0.9rem;
+    border: 1px dashed var(--jp-border-subtle);
+    padding: 0.9rem 0.9rem;
+    background: var(--jp-surface-soft);
+    cursor: pointer;
+    text-align: center;
+    transition:
+        border-color $jp-transition-fast,
+        background-color $jp-transition-fast,
+        box-shadow $jp-transition-fast;
+}
+
+.file-drop__label {
+    font-size: 0.86rem;
+    margin: 0 0 0.2rem;
+}
+
+.file-drop__hint {
+    font-size: 0.78rem;
+    margin: 0;
+    color: var(--jp-text-muted);
+}
+
+.file-drop__filename {
+    margin: 0.45rem 0 0;
+    font-size: 0.8rem;
+    color: $jp-primary;
+    word-break: break-all;
+}
+
+.file-drop__input {
+    display: none;
+}
+
+.file-drop--active,
+.file-drop:hover {
+    border-color: $jp-primary-alt;
+    background: rgba(56, 189, 248, 0.04);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.6);
+}
+
+// ---------------- BOTÃO ADICIONAR ----------------
+
+.rm-add {
+    position: relative;
+    margin-top: 0.2rem;
+}
+
+.rm-add__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: $jp-radius-pill;
+    border: 1px dashed var(--jp-border-subtle);
+    background: transparent;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    color: var(--jp-text-muted);
+    transition:
+        border-color $jp-transition-fast,
+        background-color $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        transform $jp-transition-fast;
+}
+
+.rm-add__plus {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(56, 189, 248, 0.16);
+    color: $jp-primary;
+    font-size: 0.9rem;
+}
+
+.rm-add__btn:hover {
+    border-color: $jp-primary-alt;
+    background: rgba(15, 23, 42, 0.04);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.4);
+    transform: translateY(-1px);
+}
+
+// Menu popup
+.rm-add__menu {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    background: var(--jp-surface);
+    border-radius: 0.9rem;
+    border: 1px solid var(--jp-border-subtle);
+    padding: 0.3rem;
+    min-width: 190px;
+    box-shadow: 0 18px 46px rgba(15, 23, 42, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(4px);
+    transition:
+        opacity $jp-transition-fast,
+        transform $jp-transition-fast;
+    z-index: 10;
+}
+
+.rm-add__menu[aria-hidden='false'] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.rm-add__option {
+    border-radius: 0.65rem;
+    border: none;
+    background: transparent;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.86rem;
+    text-align: left;
+    cursor: pointer;
+    color: var(--jp-text);
+
+    &:hover {
+        background: rgba(15, 23, 42, 0.06);
+    }
+}
+
+// ---------------- FOOTER ----------------
+
+.rm-footer-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+
+    @media (max-width: 720px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.rm-footer-actions__hint {
+    font-size: 0.8rem;
+    color: var(--jp-text-muted);
+}
+
+// Botão padrão (mesma vibe do index)
+.jp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.6rem;
+    border-radius: $jp-radius-pill;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    transition:
+        transform $jp-transition-fast,
+        box-shadow $jp-transition-fast,
+        background-position $jp-transition-fast,
+        filter $jp-transition-fast;
+}
+
+.jp-button--primary {
+    background-image: linear-gradient(130deg, $jp-primary-alt, $jp-primary);
+    background-size: 150% 150%;
+    color: #f9fafb;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.95);
+
+    &:hover {
+        transform: translateY(-1px);
+        background-position: 100% 0;
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 1);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    }
+}
+
+// Footer global
+.jp-footer {
+    @extend .jp-container;
+    font-size: 0.78rem;
+    color: var(--jp-text-muted);
+    border-top: 1px solid var(--jp-border-subtle);
+    padding-top: 0.9rem;
+    padding-bottom: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.9rem;
+
+    @media (max-width: 640px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.jp-footer__right {
+    display: flex;
+    gap: 0.6rem;
+}
+
+// ---------------- AVISO MENSAGEM PRIVADA / ASSINATURA (UX SUAVIZADO) ----------------
+
+// destaque leve no select quando a regra é acionada
+.rm-select--warn {
+    border-color: #f59e0b;
+}
+
+// estado do container em aviso suave
+.rm-field--warn {
+    .rm-field__label {
+        color: #f59e0b;
+    }
+}
+
+// helper começa oculto; só aparece quando o campo está em estado de aviso
+.rm-field__helper--warn {
+    display: none;
+}
+
+.rm-field--warn .rm-field__helper--warn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: #f59e0b;
+    margin-top: 0.25rem;
+
+    &::before {
+        content: 'ℹ️';
+        font-size: 0.9rem;
+    }
+
+    // aviso temporário: aparece e depois some suavemente
+    animation: rmFadeWarn 4s ease-out forwards;
+}
+
+// animação de "piscar" na borda do select quando força Bot Principal
+@keyframes rmPulseWarn {
+    0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    }
+}
+
+.rm-field--pulse {
+
+    .rm-select,
+    .rm-select--warn {
+        animation: rmPulseWarn 0.6s ease-out 2;
+    }
+}
+
+// animação do texto de aviso (entra e depois some)
+@keyframes rmFadeWarn {
+    0% {
+        opacity: 0;
+        transform: translateY(2px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+}
+
+
+.rm-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.72); // mais escuro
+    backdrop-filter: blur(6px); // blur pra destacar o modal
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.rm-modal {
+    width: min(520px, 100% - 2rem);
+    border-radius: 1rem;
+    padding: 1.4rem 1.6rem;
+    background-color: var(--jp-surface, #ffffff);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9); // sombra mais forte
+    border: 1px solid rgba(148, 163, 184, 0.55); // borda pra separar do fundo
+}
+
+html[data-theme="dark"] .rm-modal {
+    background:
+        radial-gradient(circle at top left,
+            rgba(56, 189, 248, 0.18),
+            transparent 55%),
+        rgba(15, 23, 42, 0.98); // usa o "surface", mais claro que o fundo
+    border-color: rgba(148, 163, 184, 0.9);
+    box-shadow: 0 32px 80px rgba(15, 23, 42, 0.95);
+}
+
+.rm-modal__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+}
+
+.rm-modal__desc {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin: 0 0 0.85rem;
+}
+
+.rm-modal__instances {
+    max-height: 260px;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: rgba(148, 163, 184, 0.12);
+    margin-bottom: 0.9rem;
+}
+
+.rm-modal__row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+}
+
+.rm-modal__row--all {
+    font-weight: 600;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.5);
+    margin-bottom: 0.25rem;
+    padding-bottom: 0.4rem;
+}
+
+.rm-modal__list {
+    margin-top: 0.25rem;
+}
+
+.rm-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.rm-modal__error,
+.rm-modal__empty {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Hint de erro em dropzone (arquivo incompatível) */
+.file-drop__hint--error {
+    color: #b91c1c;
+    font-weight: 600;
+    font-size: 0.95rem;
+    animation: rmFieldErrorPulse 0.35s ease-in-out 3;
+}
+
+.file-drop--error {
+    border-color: #b91c1c !important;
+}
+
+@keyframes rmFieldErrorPulse {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    50% {
+        opacity: 0.55;
+        transform: translateY(-1px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bloco com erro (scroll + destaque) */
+.msg-block--error {
+    border: 1px solid #b91c1c;
+    border-radius: 0.75rem;
+    animation: rmBlockErrorPulse 0.4s ease-in-out 3;
+}
+
+@keyframes rmBlockErrorPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.35);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(248, 113, 113, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
+    }
+}
+
+/* Botão excluir destacado quando tem erro */
+.msg-block__remove--highlight {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.6);
+}
+
+/* Notificações (toast) */
+.rm-notify-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rm-notify {
+    min-width: 260px;
+    max-width: 360px;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.45);
+    animation: rmNotifySlideIn 0.25s ease-out;
+    border-left: 4px solid transparent;
+}
+
+.rm-notify--error {
+    background: #431226;
+    color: #fee2e2;
+    border-left-color: #f97373;
+}
+
+.rm-notify--success {
+    background: #022c22;
+    color: #bbf7d0;
+    border-left-color: #22c55e;
+}
+
+.rm-notify--info {
+    background: #020617;
+    color: #e5e7eb;
+    border-left-color: #38bdf8;
+}
+
+.rm-notify--hide {
+    animation: rmNotifyFadeOut 0.22s ease-in forwards;
+}
+
+@keyframes rmNotifySlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(12px) translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes rmNotifyFadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(12px) translateY(-4px);
+    }
+}
+

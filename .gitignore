@@ -190,3 +190,13 @@ htmlcov/
 .idea/
 *.swp
 *.swo
+
+
+# =========================
+# [DEBUG] RECENT EDITS
+# =========================
+mapa_conteudo.ini
+mapa_diretorio.ini
+mapa_visual.txt
+docs/
+# =========================

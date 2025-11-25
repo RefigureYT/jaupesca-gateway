@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Jaú Pesca · Remarketing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Construtor de mensagens de remarketing interno da Jaú Pesca." />
+    <link rel="stylesheet" href="/remarketing/public/static/styles/remarketing/remarketing.css" />
+</head>
+
+<body>
+    <div class="jp-app">
+        <!-- HEADER -->
+        <header class="jp-header">
+            <div class="jp-header__brand">
+                <!-- Seta para voltar para /home -->
+                <a href="/home" class="jp-header__back" aria-label="Voltar para a página inicial">
+                    <span class="jp-header__back-icon" aria-hidden="true">←</span>
+                    <span class="jp-header__back-label">Home</span>
+                </a>
+                <img src="/remarketing/public/img/Peixinho-Jau-Pesca.png" alt="Jaú Pesca" class="jp-header__logo" loading="lazy" />
+                <div class="jp-header__text">
+                    <span class="jp-header__title">Jaú Pesca · Remarketing</span>
+                    <span class="jp-header__subtitle">
+                        Montagem de sequência de mensagens
+                    </span>
+                </div>
+            </div>
+
+            <div class="jp-header__actions">
+                <!-- TOGGLE TEMA -->
+                <button class="theme-toggle" type="button" data-theme-toggle
+                    aria-label="Alternar entre modo claro e escuro">
+                    <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+                    <span class="theme-toggle__label">Modo escuro</span>
+                </button>
+
+                <a href="/remarketing/config" class="jp-header__settings">
+                    <span class="jp-header__settings-icon" aria-hidden="true">⚙</span>
+                    <span class="jp-header__settings-label">Configurações</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- MAIN -->
+        <main class="rm-main">
+            <section class="rm-panel" aria-labelledby="rm-title">
+                <header class="rm-panel__header">
+                    <h1 id="rm-title" class="rm-title">Fluxo de mensagens</h1>
+                    <p class="rm-subtitle">
+                        Monte abaixo a sequência que será usada para contatar os clientes
+                        selecionados pelo fluxo interno.
+                    </p>
+                </header>
+
+                <form class="rm-form" id="rm-form" autocomplete="off">
+                    <!-- CONFIGURAÇÕES GERAIS -->
+                    <div class="rm-config">
+                        <!-- Enviar mensagem privada -->
+                        <div class="rm-field rm-field--inline">
+                            <div class="rm-field__label-group">
+                                <span class="rm-field__label">Enviar mensagem privada</span>
+                                <button type="button" class="rm-info" aria-label="O que é enviar mensagem privada?">
+                                    i
+                                    <span class="rm-info__tooltip">
+                                        Se ativado, a mensagem será registrada como privada no
+                                        CRM. O cliente não recebe esta mensagem, ela fica apenas
+                                        como anotação interna.
+                                        <br /><br />
+                                        <em>
+                                            Mensagens privadas só estão disponíveis quando enviadas
+                                            pelo <strong>Bot Principal (Chatwoot/CRM)</strong>.
+                                        </em>
+                                    </span>
+                                </button>
+                            </div>
+
+                            <label class="toggle">
+                                <input type="checkbox" id="rm-private-toggle" name="send_private" />
+                                <span class="toggle__track">
+                                    <span class="toggle__thumb"></span>
+                                </span>
+                            </label>
+                        </div>
+
+                        <!-- Assinatura -->
+                        <div class="rm-field rm-field--inline">
+                            <div class="rm-field__label-group">
+                                <span class="rm-field__label">Assinatura</span>
+                                <button type="button" class="rm-info" aria-label="Como funciona a assinatura?">
+                                    i
+                                    <span class="rm-info__tooltip">
+                                        Define como o cliente verá o remetente. <br />
+                                        <strong>SEM:</strong> apenas a mensagem. <br />
+                                        <strong>Bot Principal:</strong> o cliente verá algo como
+                                        “Bot Principal: sua mensagem”. <br />
+                                        A assinatura só é aplicada quando a mensagem não é privada.
+                                    </span>
+                                </button>
+                            </div>
+
+                            <select name="signature" id="rm-signature" class="rm-select"
+                                aria-label="Assinatura da mensagem">
+                                <option value="none">SEM</option>
+                                <option value="bot-principal">Bot Principal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- BUILDER DE MENSAGENS -->
+                    <div class="rm-builder">
+                        <!-- Abas de tipo de fluxo -->
+                        <div class="rm-builder__tabs" role="tablist" aria-label="Tipo de fluxo de remarketing">
+                            <button type="button" class="rm-builder__tab rm-builder__tab--active" data-flow-type="cnpj"
+                                role="tab" aria-selected="true">
+                                CNPJ
+                            </button>
+                            <button type="button" class="rm-builder__tab" data-flow-type="generico" role="tab"
+                                aria-selected="false">
+                                Genérico
+                            </button>
+                        </div>
+
+                        <div class="rm-builder__list" id="rm-block-list" aria-live="polite">
+                            <!-- Blocos são adicionados por JS -->
+                        </div>
+
+                        <!-- BOTÃO ADICIONAR -->
+                        <div class="rm-add">
+                            <button type="button" class="rm-add__btn" id="rm-add-btn" aria-haspopup="true"
+                                aria-expanded="false" aria-controls="rm-add-menu">
+                                <span class="rm-add__plus">+</span>
+                                <span>Adicionar mensagem</span>
+                            </button>
+
+                            <div class="rm-add__menu" id="rm-add-menu" role="menu" aria-hidden="true">
+                                <button type="button" class="rm-add__option" data-type="text" role="menuitem">
+                                    Texto
+                                </button>
+                                <button type="button" class="rm-add__option" data-type="document" role="menuitem">
+                                    Documento
+                                </button>
+                                <button type="button" class="rm-add__option" data-type="image" role="menuitem">
+                                    Imagem
+                                </button>
+                                <button type="button" class="rm-add__option" data-type="video" role="menuitem">
+                                    Vídeo
+                                </button>
+                                <button type="button" class="rm-add__option" data-type="audio" role="menuitem">
+                                    Áudio
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AÇÕES FINAIS -->
+                    <footer class="rm-footer-actions">
+                        <button type="submit" class="jp-button jp-button--primary" id="rm-save-btn">
+                            Salvar configuração
+                        </button>
+                        <p class="rm-footer-actions__hint">
+                            Esta tela cuida apenas da montagem das mensagens. O envio real é
+                            gerenciado pelos fluxos internos.
+                        </p>
+                    </footer>
+                </form>
+            </section>
+        </main>
+
+        <footer class="jp-footer">
+            <span>Jaú Pesca · Ambiente interno</span>
+            <div class="jp-footer__right">
+                <span>Telemarketing & Remarketing</span>
+            </div>
+        </footer>
+    </div>
+    <script src="/remarketing/public/static/javascript/remarketing/remarketing.js" defer></script>
+</body>
+
+</html>

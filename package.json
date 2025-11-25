@@ -4,7 +4,7 @@
   "description": "Plataforma principal de aplicações web da Jaú Pesca. Este projeto centraliza diversos serviços internos e externos em um único subdomínio, organizados por paths de URL.",
   "main": "src/server.js",
   "scripts": {
-    "dev": "node src/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/server.js",
     "start": "NODE_ENV=production node src/server.js"
   },
   "repository": {
@@ -20,7 +20,18 @@
   },
   "homepage": "https://github.com/RefigureYT/jaupesca-gateway#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.939.0",
     "dotenv": "^16.4.5",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "multer": "^2.0.2",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.1",
+    "@types/pg": "^8.15.6",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3"
   }
 }

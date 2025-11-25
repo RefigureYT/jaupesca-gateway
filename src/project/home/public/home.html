@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Jaú Pesca — Portal de Projetos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compile o SCSS abaixo para template1.css -->
+    <link rel="stylesheet" href="/home/public/home.css" />
+</head>
+
+<body class="jp-portal">
+    <main class="portal">
+        <header class="portal__header">
+            <div class="portal__logo-circle">
+                <img src="/home/public/Peixinho-Jaú-Pesca.svg" alt="Jaú Pesca" class="portal__logo-image" />
+            </div>
+
+            <div class="portal__title-block">
+                <h1>Jaú Pesca</h1>
+                <p>Portal de Projetos Internos</p>
+            </div>
+        </header>
+
+        <!-- BARRA DE PESQUISA -->
+        <section class="portal__search" aria-label="Pesquisar projetos">
+            <div class="portal__search-inner">
+                <input type="search" id="projectSearch" class="portal__search-input" placeholder="Pesquisar projetos..."
+                    autocomplete="off" />
+            </div>
+        </section>
+
+        <section class="portal__projects" aria-label="Projetos da Jaú Pesca">
+            <a class="project-card" href="/remarketing" target="_self" rel="noreferrer">
+                <h2>CRM / Remarketing</h2>
+                <p>Configurações e campanhas integradas ao Chatwoot.</p>
+            </a>
+
+            <a class="project-card project-card--outline project-card--disabled" aria-disabled="true">
+                <div class="project-card__header">
+                    <h2>Painel Interno</h2>
+                    <span class="project-card__badge">Em breve</span>
+                </div>
+                <p>Métricas, dashboards e monitoramento.</p>
+            </a>
+        </section>
+
+        <!-- MENSAGEM QUANDO NENHUM PROJETO FOR ENCONTRADO -->
+        <div class="portal__empty" id="noResults" aria-live="polite">
+            <p>Nenhum projeto encontrado para essa busca.</p>
+        </div>
+
+        <footer class="portal__footer">
+            <small>© <span id="year"></span> Jaú Pesca · Uso interno</small>
+        </footer>
+    </main>
+
+    <script>
+        (function () {
+            const yearSpan = document.getElementById('year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            const searchInput = document.getElementById('projectSearch');
+            const cards = Array.from(document.querySelectorAll('.project-card'));
+            const emptyState = document.getElementById('noResults');
+            const projectsGrid = document.querySelector('.portal__projects');
+
+            if (!searchInput || cards.length === 0) return;
+
+            // Usado para evitar "atrasos" de timeouts antigos sobrescrevendo o estado novo
+            let filterRun = 0;
+
+            searchInput.addEventListener('input', () => {
+                const term = searchInput.value.trim().toLowerCase();
+                const currentRun = ++filterRun;
+                let visibleCount = 0;
+
+                cards.forEach((card) => {
+                    const text = card.textContent.toLowerCase();
+                    const match = text.includes(term);
+
+                    if (match) {
+                        visibleCount++;
+
+                        // Se estava oculto, mostra com animação de entrada
+                        if (card.style.display === 'none' || card.dataset.hidden === 'true') {
+                            card.style.display = '';
+                            card.dataset.hidden = 'false';
+                            card.classList.remove('is-exiting');
+                            card.classList.add('is-entering');
+
+                            setTimeout(() => {
+                                if (currentRun !== filterRun) return;
+                                card.classList.remove('is-entering');
+                            }, 180);
+                        }
+                    } else {
+                        // Se está visível, anima a saída e depois esconde
+                        if (card.style.display !== 'none' && card.dataset.hidden !== 'true') {
+                            card.classList.remove('is-entering');
+                            card.classList.add('is-exiting');
+
+                            setTimeout(() => {
+                                if (currentRun !== filterRun) return;
+                                card.style.display = 'none';
+                                card.dataset.hidden = 'true';
+                                card.classList.remove('is-exiting');
+                            }, 180);
+                        }
+                    }
+                });
+
+                if (emptyState) {
+                    emptyState.classList.toggle('portal__empty--visible', visibleCount === 0);
+                }
+
+                // Pequeno "pulse" no grid quando a lista muda
+                if (projectsGrid) {
+                    projectsGrid.classList.remove('portal__projects--pulse');
+                    // força reflow pra reiniciar animação
+                    void projectsGrid.offsetWidth;
+                    projectsGrid.classList.add('portal__projects--pulse');
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
