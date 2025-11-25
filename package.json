@@ -1,0 +1,26 @@
+{
+  "name": "jaupesca-gateway",
+  "version": "1.0.0",
+  "description": "Plataforma principal de aplicações web da Jaú Pesca. Este projeto centraliza diversos serviços internos e externos em um único subdomínio, organizados por paths de URL.",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RefigureYT/jaupesca-gateway.git"
+  },
+  "keywords": [],
+  "author": "Kelvin Kauan Melo Mattos",
+  "license": "Proprietary",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RefigureYT/jaupesca-gateway/issues"
+  },
+  "homepage": "https://github.com/RefigureYT/jaupesca-gateway#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0"
+  }
+}

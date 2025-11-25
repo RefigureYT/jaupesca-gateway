@@ -1,0 +1,38 @@
+JauPesca-Gateway/
+├─ .dirignore
+├─ .env
+├─ .env.example
+├─ .gitignore
+├─ .nvmrc
+├─ Dockerfile
+├─ LICENSE
+├─ README.md
+├─ docs
+│  └─ architecture.md
+├─ package.json
+└─ src
+   ├─ config
+   │  ├─ app.js
+   │  └─ env.js
+   ├─ project
+   │  ├─ projeto-exemplo-1
+   │  │  ├─ img
+   │  │  ├─ index.js
+   │  │  ├─ static
+   │  │  │  ├─ projeto.css
+   │  │  │  └─ projeto.js
+   │  │  └─ templates
+   │  │     └─ projeto.html
+   │  └─ projeto-exemplo-2
+   │     ├─ img
+   │     ├─ index.js
+   │     ├─ static
+   │     │  ├─ projeto.css
+   │     │  └─ projeto.js
+   │     └─ templates
+   │        └─ projeto.html
+   ├─ routes
+   │  ├─ health.routes.js
+   │  └─ index.js
+   ├─ server.js
+   └─ services
