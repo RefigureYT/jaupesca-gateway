@@ -2,10 +2,11 @@
   "name": "jaupesca-gateway",
   "version": "1.0.0",
   "description": "Plataforma principal de aplicações web da Jaú Pesca. Este projeto centraliza diversos serviços internos e externos em um único subdomínio, organizados por paths de URL.",
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/server.js",
-    "start": "NODE_ENV=production node src/server.js"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.js",
+    "build": "tsc",
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "repository": {
     "type": "git",

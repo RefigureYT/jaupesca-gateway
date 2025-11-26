@@ -11,12 +11,16 @@ const env = {
     env: process.env.APP_ENV || process.env.NODE_ENV || 'development',
     port: Number(process.env.APP_PORT || 15432),
     ip: process.env.APP_IP || '0.0.0.0',
+
+    // MINIO (S3 Jaú Pesca)
     minioEndpoint: process.env.MINIO_ENDPOINT || 'NOT-SET',
     minioRegion: process.env.MINIO_REGION || 'us-east-1',
     minioAccessKey: process.env.MINIO_ACCESS_KEY || 'NOT-SET',
     minioSecretKey: process.env.MINIO_SECRET_KEY || 'NOT-SET',
     minioBucketRemarketing: process.env.MINIO_BUCKET_REMARKETING || 'NOT-SET',
     minioPublicBaseUrl: process.env.MINIO_PUBLIC_BASE_URL || 'NOT-SET',
+
+    // DATABASE PRINCIPAL (PostgreSQL)
     dbHost: process.env.DB_HOST || 'NOT-SET',
     dbPort: process.env.DB_PORT || 'NOT-SET',
     dbUser: process.env.DB_USER || 'NOT-SET',

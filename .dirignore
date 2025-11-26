@@ -1,0 +1,6 @@
+dist/
+node_modules/
+.env.example
+mapa_conteudo.ini
+mapa_diretorio.ini
+mapa_visual.txt

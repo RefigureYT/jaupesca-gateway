@@ -1,0 +1,13 @@
+# =========================
+.env.example
+.env
+.gitignore
+gerar_mapa_diretorio.py
+README.md
+mapa_conteudo.ini
+mapa_diretorio.ini
+mapa_visual.txt
+docs/
+.dirignore
+dist/
+# =========================
